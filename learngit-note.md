@@ -1,9 +1,15 @@
 # Git学习笔记
-## Git是分布式版本控制系统
-相对集中式版本控制系统有以下优点
-* 无需联网
-* 没有“中央服务器”，更安全
-* 每个开发人员本地都有一个带有历史纪录的版本库
+## Git简介
+* Git是分布式版本控制系统
+* 集中式VS分布式：  
+
+   1）集中式版本控制系统，版本库集中存放在中央服务器，必须要联网才能工作,没有历史版本库。  
+   
+   2）分布式版本控制系统，没有“中央服务器”，每个开发人员电脑上都有一个完整的版本库。  
+   
+   3）分布式系统优势：安全性更高，不需要联网，如果“中央服务器”故障，任何一个其他开发人员的本地都有最新的带有历史记录的版本库。  
+   
+   4）主要区别在于历史版本库的存放，集中式系统历史版本只存在于中央服务器，而分布式控制系统中每个本地库都有历史记录存放。
 ## 安装Git
 ## Git配置
 ``` 
@@ -119,14 +125,110 @@ $ git commit -m "message"
 `$ git clone https://github.com/username/repositoryname.git`
 
 ## 分支管理
-### 查看分支
+#### 查看分支
 `$ git branch`
-### 创建分支
+#### 创建分支
 `$ git branch <branch-name>`
-### 切换分支
+#### 切换分支
 `$ git checkout <branch-name>`
-### 创建+切换分支
+#### 创建+切换分支
 `$ git checkout -b <branch-name>`
+#### 合并某分支到当前分支
+`$ git merge <branch-name>`
+#### 普通模式合并分支
+`$ git merge --no-ff -m "description" <branch-name>`  
+
+通常进行分支合并时，如果可以，Git会使用`Fast forward`模式，删除分支后，分支历史信息会丢失  
+
+`--no-ff`表示禁用`Fast forward`模式，能看出曾做过合并
+#### 删除分支
+`$ git branch -d <branch-name>`
+#### 强行删除分支
+`$ git branch -D <branch-name>`
+#### 查看分支合并图
+`$ git log --graph`  
+
+`$ git log --graph --pretty=oneline --abbrev-commit`，简洁查看
+## Bug分支
+假设场景——设A为游戏软件  
+
+      1. master 上面发布的是A的1.0版本
+		2. dev 上开发的是A的2.0版本
+		3. 这时，用户反映 1.0版本存在漏洞，有人利用这个漏洞开外挂
+		4. 需要从dev切换到master去填这个漏洞，正常必须先提交dev目前的工作，才能切换
+		5. 而dev的工作还未完成，不想提交，所以先把dev的工作stash一下。然后切换到master
+		6. 在master建立分支issue101并切换
+		7. 在issue101上修复漏洞
+		8. 修复后，在master上合并并删除issue101
+		9. 切回dev，恢复原本工作，继续工作
+#### 保存工作现场
+`$ git stash`
+#### 查看保存的工作现场
+`$ git stash list`
+#### 恢复工作现场
+`$ git stash apply`
+#### 删除工作现场
+`$ git stash drop`
+#### 恢复并删除工作现场
+`git stash pop`
+## Feature分支
+每添加一个新功能，最好新建一个feature分支，在上面开发完成后，合并，最后，删除该feature分支
+## 多人协作
+#### 查看远程库信息
+`$ git remote`或`git remote -v`
+#### 本地推送分支
+`$ git push origin <branch-name>`
+#### 在本地创建和远程分支对应的分支
+`$ git checkout -b <branch-name> origin/<branch-name>`
+#### 建立本地分支和远程分支的关联
+`$ git branch --set-upstream <branch-name> origin/<branch-name>`  
+
+或  
+
+`$ git branch --set-upstream-to=origin/<branch-name> <branch-name>`
+#### 从远程抓取分支
+`$ git pull`
+## 多人协作通常的工作模式
+1. 先试图推送自己的修改`git push`
+2. 若推送失败，则远程分支比本地分支更新，`git pull`拉取远程分支试图合并
+3. 若合并有冲突，则解决冲突，并在本地提交(`add` 和 `commit`)
+4. 若没有冲突或解决了冲突，再次推送`git push`
+## Rebase
+“变基”  
+
+`$ git rebase`  
+
+只对尚未推送或尚未分享给别人的本地修改执行变基操作清理历史  
+
+从不对已推送至别处的提交执行变基操作
+## 标签管理
+发布一个版本时，我们通常先在版本库中打一个标签（`tag`），这样，就唯一确定了打标签时刻的版本  
+
+将来无论什么时候，取某个标签的版本，就是把那个打标签的时刻的历史版本取出来。所以，标签也是版本库的一个快照
+### 创建标签
+`$ git tag <tag-name>`，在最新commit上打一个标签  
+
+`$ git tag <tag-name> commit-id`，在对应的commit_id上打一个新标签
+### 创建带有说明的标签
+`$ git tag -a <tag-name> -m "description" commit-id`，`-a`指定标签名，`-m`指定说明文字  
+### 查看所有标签
+`$ git tag`  
+### 查看对应标签的信息
+`$ git show <tag-name>`
+**注意**标签总是和某个commit挂钩。  
+
+如果这个commit既出现在master分支，又出现在dev分支，那么在这两个分支上都可以看到这个标签。
+### 操作标签
+#### 推送某个标签到远程
+`$ git push origin <tag-name>`
+#### 一次性推送全部尚未推送的标签到远程
+`git push origin --tag`
+#### 删除一个本地标签
+`$ git tag -d <tag-name>`
+#### 删除一个远程标签
+`$ git tag -d <tag-name>`，先从本地删除  
+
+`$ git push origin :refs/tags/<tag-name>`，在从远程删除
 
 
 
