@@ -8,7 +8,8 @@
 3. 分布式优势：安全性更高，无需联网，若“中央服务器”故障，任何一个其他开发者本地都有最新的带历史记录的版本库。  
 4. 主要区别在于历史版本库的存放，集中式历史版本只存在于中央服务器，而分布式中每个本地库都有历史记录存放。
 ## 安装Git
-* Linux系统
+* Linux系统  
+
 Debian或Ubuntu Linux
 ```
 sudo apt-get install git
@@ -21,7 +22,8 @@ sudo apt-get install git-core
 ```
 ./config ——> make ——> sudo make install
 ```
-* Windows系统
+* Windows系统  
+
 [官网下载](https://git-scm.com/downloads)，安装完成后，“Git”->“Git Bash”即可打开
 # Git命令
 ****
