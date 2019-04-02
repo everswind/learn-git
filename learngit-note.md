@@ -216,10 +216,10 @@ $ git branch -D <branch-name>
 ```
 $ git log --graph
 ```  
+简洁查看
 ```
 $ git log --graph --pretty=oneline --abbrev-commit
 ```
-简洁查看
 ### Bug分支
 假设场景——设A为游戏软件  
 
@@ -257,7 +257,11 @@ git stash pop
 ## 多人协作
 #### 查看远程库信息
 ```
-$ git remote`或`git remote -v
+$ git remote
+```
+详细查看
+```
+git remote -v
 ```
 #### 本地推送分支
 ```
@@ -284,8 +288,7 @@ $ git pull
 2. 若推送失败，则远程分支比本地分支更新，`git pull`拉取远程分支试图合并
 3. 若合并有冲突，则解决冲突，并在本地提交(`add` 和 `commit`)
 4. 若没有冲突或解决了冲突，再次推送`git push`
-## Rebase
-“变基”  
+## Rebase“变基”  
 ```
 $ git rebase
 ```  
@@ -331,15 +334,11 @@ git push origin --tag
 $ git tag -d <tag-name>
 ```
 #### 删除一个远程标签
+先从本地删除  
 ```
 $ git tag -d <tag-name>
 ```
-先从本地删除  
+再从远程删除
 ```
 $ git push origin :refs/tags/<tag-name>
 ```
-再从远程删除
-
-
-
-
