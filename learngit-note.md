@@ -1,5 +1,30 @@
 # Git学习笔记
 ****
+#### 目录
+[Git简介](#git简介)  
+
+[安装Git](#安装git)  
+
+[创建版本库](#创建版本库)||[使用vi编辑器](#使用vi编辑器)||[把文件添加到版本库](#把文件添加到版本库)||[查看工作区当前状态](#查看工作区当前状态)  
+
+[时光穿梭-版本回退与重返未来](#时光穿梭)  
+
+[工作区与暂存区-管理修改比较不同](#工作区与暂存区)  
+
+[撤销修改](#撤销修改)||[删除文件](#删除文件)  
+
+[远程仓库](#远程仓库)  
+
+[分支管理](#分支管理)||[Bug分支](#bug分支)||[Feature分支](#feature分支)  
+
+[多人协作](#多人协作)
+
+[标签管理](#标签管理)||[操作标签](#操作标签)  
+
+[使用GitHub和码云](#使用github)
+
+[自定义Git](#自定义git)  
+****
 ## Git简介
 * Git是分布式版本控制系统
 * 集中式VS分布式：  
@@ -390,7 +415,8 @@ $ git remote rm origin
 ```
 $ git remote add github git@github.com:username/repositoryname.git
 ```
-注意，远程库的名称叫`github`，不叫`origin`了
+注意，远程库的名称叫`github`，不叫`origin`了  
+
 3. 接着，再关联码云的远程库：
 ```
 $ git remote add gitee git@gitee.com:username/repositoryname.git
