@@ -216,7 +216,10 @@ $ git branch -D <branch-name>
 ```
 $ git log --graph
 ```  
-`$ git log --graph --pretty=oneline --abbrev-commit`，简洁查看
+```
+$ git log --graph --pretty=oneline --abbrev-commit
+```
+简洁查看
 ### Bug分支
 假设场景——设A为游戏软件  
 
