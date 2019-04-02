@@ -390,7 +390,8 @@ $ git remote rm origin
 ```
 $ git remote add github git@github.com:username/repositoryname.git
 ```
-注意，远程库的名称叫`github`，不叫`origin`了
+注意，远程库的名称叫`github`，不叫`origin`了  
+
 3. 接着，再关联码云的远程库：
 ```
 $ git remote add gitee git@gitee.com:username/repositoryname.git
