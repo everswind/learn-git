@@ -37,14 +37,14 @@ $ git init
 
 |命令|效果|
 |--|--|
-|:w|保存文件，不退出vi|
-|:w \<file-name> |另存为file,不退出|
-|:w!|强制保存，不退出|
-|:wq|保存文件，退出|
-|:wq!|强制保存，退出|
-|:q|不保存，退出|
-|:q!|不保存，强制退出|
-|:e!|放弃所有修改，回到上次保存文件开始编辑|
+|`:w`|保存文件，不退出vi|
+|`:w \<file-name>`|另存为file,不退出|
+|`:w!`|强制保存，不退出|
+|`:wq`|保存文件，退出|
+|`:wq!`|强制保存，退出|
+|`:q`|不保存，退出|
+|`:q!`|不保存，强制退出|
+|`:e!`|放弃所有修改，回到上次保存文件开始编辑|
 ## 把文件添加到版本库
 ```
 $ git add <file-name>
@@ -59,11 +59,16 @@ $ git status
 ```
 $ git reset --hard commit-id
 ``` 
-
-**确定版本回退commit-id**  
-
-`$ git log`，查看提交历史；`$ git log --pretty=oneline`，简化显示；按`q`退出查看  
-  
+### 确定版本回退commit-id
+#### 查看提交历史
+```
+$ git log
+```
+按`q`退出查看 
+#### 简化显示提交历史
+```
+$ git log --pretty=oneline
+````
 `HEAD`，当前版本  
 
 `HEAD^`，上个版本  
@@ -72,37 +77,69 @@ $ git reset --hard commit-id
 
 `HEAD~100`，往上100个版本
 
-**确定重返未来commit-id**  
-
-`$ git reflog`，查看命令历史
+### 确定重返未来commit-id
+#### 查看命令历史
+```
+$ git reflog
+```
 ## 工作区与暂存区
 ![](https://camo.githubusercontent.com/14659c736537a60e9cf0076be119e14ef3cb089a/68747470733a2f2f63646e2e6c69616f78756566656e672e636f6d2f63646e2f66696c65732f6174746163686d656e74732f30303133383439303737303239313733343637323965396166626634313237623664666261653932303761663031363030302f30)  
 
-   工作区就是电脑中能看到的目录，工作区有一个隐藏目录`.git`，这是Git的版本库  
+工作区就是电脑中能看到的目录，工作区有一个隐藏目录`.git`，这是Git的版本库 
+### 管理修改
+#### 修改但未add
+比较工作区与暂存区（即上次git add的内容）的不同  
 
-  `$ git diff`，比较工作区与暂存区（即上次git add的内容）的不同，`$ git diff <file-name>`，比较具体文件的不同  
-
-  `$ git diff --staged`或`$ git diff --cached`，比较暂存区与仓库分支（上次git commit）的不同
+比较所有修改文件的不同
+```
+$ git diff
+```
+比较指定修改文件的不同
+```
+$ git diff <file-name>
+```
+#### 修改已add但未commit
+比较暂存区与仓库分支（上次git commit）的不同
+```
+$ git diff --staged
+```
+或
+```
+$ git diff --cached
+```
 ## 撤销修改
-* 场景1——工作区已修改但未`git add`到暂存区  
-
-  `$ git checkout -- <file name>`，其实就是用版本库里的版本替换工作区的版本
-* 场景2——工作区修改且已经`git add`到暂存区，分两步  
-
-  先`$ git reset HEAD <file name>`回到场景1，再按场景1操作
-* 场景3：已经`commit`但没有推送到远程库——**版本回退**
+* 场景1——工作区已修改但未add到暂存区  
+```
+$ git checkout -- <file name>
+```
+其实就是用版本库里的版本替换工作区的版本
+* 场景2——工作区修改且已经git add到暂存区，分两步 
+```
+$ git reset HEAD <file name>
+```
+回到场景1，再按场景1操作
+* 场景3：已经commit但没有推送到远程库——**版本回退**
 ## 删除文件
-假设文件原已`commit`，目前情况——已经在目录下手动删除或`$ rm <file name>`  
+假设文件原已commit，目前情况是——已经在目录下手动或`$ rm <file name>`删除文件
+* 选择一：确实要从版本库中删除该文件，分两步  
 
-选择一：确实要从版本库中删除该文件，分两步  
-
-`$ git rm <file-name>`或`git add <file-name>`  
-
-`$ git commit -m "message"`  
-
-选择二：删错了，要恢复  
-
-`$ git checkout -- <file name>`，其实就是用版本库里的版本替换工作区的版本
+第一步
+```
+$ git rm <file-name>
+```
+或
+```
+git add <file-name>
+```  
+第二步
+```
+$ git commit -m "description"
+```  
+* 选择二：删错了，要恢复  
+```
+$ git checkout -- <file name>
+```
+其实就是用版本库里的版本替换工作区的版本
 ## 远程仓库
 #### 创建SSH Key
 ```
