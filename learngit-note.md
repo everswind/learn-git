@@ -35,7 +35,8 @@ $ git config --global user.email "email@example.com"
 # Git命令
 ****
 ## 创建版本库
-#### 选择一个合适目录
+#### 选择一个合适目录  
+Windows系统请确保目录名（包括父目录）不包含中文
 1. 如`$ cd d:`
 2. `$ mkdir <repository-name>`，创建库名
 3. `$ cd <repository-name>`，进入库内  
