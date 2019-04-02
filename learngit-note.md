@@ -29,7 +29,7 @@ $ git config --global user.email "email@example.com"
 #### 在当前目录初始化库
 `$ git init`  
 ## 使用vim编辑器
-1. `vi <file-name>`，新建或修改文件
+1. `$ vi <file-name>`，新建或修改文件
 2. 按`i`进入编辑
 3. 编辑完成后按`ESC`，然后选择以下某个命令输入
 
@@ -49,7 +49,7 @@ $ git add <file-name>
 $ git commit -m "description"
 ```
 **注意**  可以多次`git add `，最后一次`git commit`
-## 查看仓库当前状态
+## 查看工作区当前状态
 `$ git status`
 ## 时光穿梭
 `$ git reset --hard commit-id` 
