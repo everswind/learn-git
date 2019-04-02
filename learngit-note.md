@@ -25,14 +25,15 @@ sudo apt-get install git-core
 * Windows系统  
 
 [官网下载](https://git-scm.com/downloads)，安装完成后，“Git”->“Git Bash”即可打开
-# Git命令
-****
-## Git配置
+
+#### Git配置
 ``` 
 $ git config --global user.name "Your Name"
 $ git config --global user.email "email@example.com"
 ```
 **注意**  `--global`参数表示你这台机器上所有的Git仓库都会使用这个配置。
+# Git命令
+****
 ## 创建版本库
 #### 选择一个合适目录
 1. 如`$ cd d:`
