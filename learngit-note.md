@@ -107,17 +107,17 @@ $ git diff --cached
 ## 撤销修改
 * 场景1——工作区已修改但未add到暂存区  
 ```
-$ git checkout -- <file name>
+$ git checkout -- <file-name>
 ```
 其实就是用版本库里的版本替换工作区的版本
 * 场景2——工作区修改且已经git add到暂存区，分两步 
 ```
-$ git reset HEAD <file name>
+$ git reset HEAD <file-name>
 ```
 回到场景1，再按场景1操作
 * 场景3：已经commit但没有推送到远程库——**版本回退**
 ## 删除文件
-假设文件原已commit，目前情况是——已经在目录下手动或`$ rm <file name>`删除文件
+假设文件原已commit，目前情况是——已经在目录下手动或`$ rm <file-name>`删除文件
 * 选择一：确实要从版本库中删除该文件，分两步  
 
 第一步
@@ -134,7 +134,7 @@ $ git commit -m "description"
 ```  
 * 选择二：删错了，要恢复  
 ```
-$ git checkout -- <file name>
+$ git checkout -- <file-name>
 ```
 其实就是用版本库里的版本替换工作区的版本
 ## 远程仓库
