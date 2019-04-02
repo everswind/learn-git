@@ -279,6 +279,11 @@ git stash pop
 ### Feature分支
 每添加一个新功能，最好新建一个feature分支，在上面开发完成后，合并，最后，删除该feature分支
 ## 多人协作
+#### 多人协作通常的工作模式
+1. 先试图推送自己的修改`git push`
+2. 若推送失败，则远程分支比本地分支更新，`git pull`拉取远程分支试图合并
+3. 若合并有冲突，则解决冲突，并在本地提交(`add` 和 `commit`)
+4. 若没有冲突或解决了冲突，再次推送`git push`
 #### 查看远程库信息
 ```
 $ git remote
@@ -307,11 +312,6 @@ $ git branch --set-upstream-to=origin/<branch-name> <branch-name>
 ```
 $ git pull
 ```
-#### 多人协作通常的工作模式
-1. 先试图推送自己的修改`git push`
-2. 若推送失败，则远程分支比本地分支更新，`git pull`拉取远程分支试图合并
-3. 若合并有冲突，则解决冲突，并在本地提交(`add` 和 `commit`)
-4. 若没有冲突或解决了冲突，再次推送`git push`
 ## Rebase“变基”  
 ```
 $ git rebase
