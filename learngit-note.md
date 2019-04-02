@@ -60,7 +60,7 @@ $ git status
 $ git reset --hard commit-id
 ``` 
 ### 确定版本回退commit-id
-#### 查看提交历史
+#### 通过查看提交历史
 ```
 $ git log
 ```
@@ -78,7 +78,7 @@ $ git log --pretty=oneline
 `HEAD~100`，往上100个版本
 
 ### 确定重返未来commit-id
-#### 查看命令历史
+#### 通过查看命令历史
 ```
 $ git reflog
 ```
