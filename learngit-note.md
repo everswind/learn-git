@@ -9,16 +9,18 @@
    
    3）分布式优势：安全性更高，不需要联网，如果“中央服务器”故障，任何一个其他开发人员的本地都有最新的带有历史记录的版本库。  
    
-   4）主要区别在于历史版本库的存放，集中式系统历史版本只存在于中央服务器，而分布式控制系统中每个本地库都有历史记录存放。
+   4）主要区别在于历史版本库的存放，集中式历史版本只存在于中央服务器，而分布式中每个本地库都有历史记录存放。
 ## 安装Git
+# Git命令
+****
 ## Git配置
 ``` 
 $ git config --global user.name "Your Name"
 $ git config --global user.email "email@example.com"
 ```
-**注意**  `--global`参数表示你这台机器上所有的Git仓库都会使用这个配置
+**注意**  `--global`参数表示你这台机器上所有的Git仓库都会使用这个配置。
 ## 创建版本库
-1. 切换一个合适目录，如`$ cd d:`
+1. 选择一个合适目录，如`$ cd d:`
 2. `$ mkdir <repository-name>`，创建库名
 3. `$ cd <repository-name>`，进入库内
 4. `$ git init`，初始化库
@@ -27,7 +29,7 @@ $ git config --global user.email "email@example.com"
 ## 使用vim编辑器
 1. `vi <file-name>`，新建或修改文件
 2. 按`i`进入编辑
-3. 编辑完成后按`ESC`，然后选择以下某个命令
+3. 编辑完成后按`ESC`，然后选择以下某个命令输入
 
 |命令|效果|
 |--|--|
@@ -42,7 +44,7 @@ $ git config --global user.email "email@example.com"
 ## 把文件添加到版本库
 ```
 $ git add <file-name>
-$ git commit -m "message"
+$ git commit -m "description"
 ```
 **注意**  可以多次`git add `，最后一次`git commit`
 ## 查看仓库当前状态
@@ -71,7 +73,6 @@ $ git commit -m "message"
   `$ git diff`，比较工作区与暂存区（即上次git add的内容）的不同，`$ git diff <file-name>`，比较具体文件的不同  
 
   `$ git diff --staged`或`$ git diff --cached`，比较暂存区与仓库分支（上次git commit）的不同
-
 ## 撤销修改
 * 场景1——工作区已修改但未`git add`到暂存区  
 
@@ -81,18 +82,19 @@ $ git commit -m "message"
   先`$ git reset HEAD <file name>`回到场景1，再按场景1操作
 * 场景3：已经`commit`但没有推送到远程库——**版本回退**
 ## 删除文件
-假设文件原已`commit`，目前情况——已经目录下手动删除或`$ rm <file name>`  
+假设文件原已`commit`，目前情况——已经在目录下手动删除或`$ rm <file name>`  
 
 选择一：确实要从版本库中删除该文件，分两步  
 
 `$ git rm <file-name>`或`git add <file-name>`  
+
 `$ git commit -m "message"`  
 
 选择二：删错了，要恢复  
 
 `$ git checkout -- <file name>`，其实就是用版本库里的版本替换工作区的版本
 ## 远程仓库
-### 创建SSH Key
+#### 创建SSH Key
 `$ ssh-keygen -t rsa -C "youremail@example.com"`  
 
 **补充**  
@@ -102,7 +104,7 @@ $ git commit -m "message"
 `$ ls -ah`可见`.ssh`目录  
 
 `$ cd .ssh`可见`id_rsa`(私钥不能泄露)和`id_rsa.pub`(公钥可公开)
-### 关联远程仓库
+#### 关联远程仓库
 `$ git remote add origin git@github.com:username/repositoryname.git`
 
 或  
@@ -110,14 +112,14 @@ $ git commit -m "message"
 `$ git remote add origin https://github.com/username/repositoryname.git`  
 
 远程库默认名字为`origin` 
-### 推送到远程仓库
+#### 推送到远程仓库
 * 第一次推送到GitHub  
 
   `$ git push -u origin master`，推送master分支
 * 后续推送  
 
   `$ git push origin master	`，不再使用参数`-u`
-### 从远程库克隆
+#### 从远程库克隆
 `$ git clone git@github.com:username/repositoryname.git`  
 
 或  
@@ -149,18 +151,18 @@ $ git commit -m "message"
 `$ git log --graph`  
 
 `$ git log --graph --pretty=oneline --abbrev-commit`，简洁查看
-## Bug分支
+### Bug分支
 假设场景——设A为游戏软件  
 
-      1. master 上面发布的是A的1.0版本
-		2. dev 上开发的是A的2.0版本
-		3. 这时，用户反映 1.0版本存在漏洞，有人利用这个漏洞开外挂
-		4. 需要从dev切换到master去填这个漏洞，正常必须先提交dev目前的工作，才能切换
-		5. 而dev的工作还未完成，不想提交，所以先把dev的工作stash一下。然后切换到master
-		6. 在master建立分支issue101并切换
-		7. 在issue101上修复漏洞
-		8. 修复后，在master上合并并删除issue101
-		9. 切回dev，恢复原本工作，继续工作
+1. master 上面发布的是A的1.0版本
+2. dev 上开发的是A的2.0版本
+3. 这时，用户反映 1.0版本存在漏洞，有人利用这个漏洞开外挂
+4. 需要从dev切换到master去填这个漏洞，正常必须先提交dev目前的工作，才能切换
+5. 而dev的工作还未完成，不想提交，所以先把dev的工作stash一下。然后切换到master
+6. 在master建立分支issue101并切换
+7. 在issue101上修复漏洞
+8. 修复后，在master上合并并删除issue101
+9. 切回dev，恢复原本工作，继续工作
 #### 保存工作现场
 `$ git stash`
 #### 查看保存的工作现场
@@ -171,7 +173,7 @@ $ git commit -m "message"
 `$ git stash drop`
 #### 恢复并删除工作现场
 `git stash pop`
-## Feature分支
+### Feature分支
 每添加一个新功能，最好新建一个feature分支，在上面开发完成后，合并，最后，删除该feature分支
 ## 多人协作
 #### 查看远程库信息
@@ -188,7 +190,7 @@ $ git commit -m "message"
 `$ git branch --set-upstream-to=origin/<branch-name> <branch-name>`
 #### 从远程抓取分支
 `$ git pull`
-## 多人协作通常的工作模式
+#### 多人协作通常的工作模式
 1. 先试图推送自己的修改`git push`
 2. 若推送失败，则远程分支比本地分支更新，`git pull`拉取远程分支试图合并
 3. 若合并有冲突，则解决冲突，并在本地提交(`add` 和 `commit`)
@@ -205,15 +207,15 @@ $ git commit -m "message"
 发布一个版本时，我们通常先在版本库中打一个标签（`tag`），这样，就唯一确定了打标签时刻的版本  
 
 将来无论什么时候，取某个标签的版本，就是把那个打标签的时刻的历史版本取出来。所以，标签也是版本库的一个快照
-### 创建标签
+#### 创建标签
 `$ git tag <tag-name>`，在最新commit上打一个标签  
 
 `$ git tag <tag-name> commit-id`，在对应的commit_id上打一个新标签
-### 创建带有说明的标签
+#### 创建带有说明的标签
 `$ git tag -a <tag-name> -m "description" commit-id`，`-a`指定标签名，`-m`指定说明文字  
-### 查看所有标签
+#### 查看所有标签
 `$ git tag`  
-### 查看对应标签的信息
+#### 查看对应标签的信息
 `$ git show <tag-name>`
 **注意**标签总是和某个commit挂钩。  
 
