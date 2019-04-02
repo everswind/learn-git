@@ -180,7 +180,15 @@ $ git remote add origin git@github.com:username/repositoryname.git
 ```
 $ git remote add origin https://github.com/username/repositoryname.git
 ```  
-远程库默认名字为`origin` 
+远程库默认名字为`origin`
+#### 删除已经关联的远程库
+```
+git remote rm remote-name
+```
+若远程库默认名字为`origin`，则
+```
+git remote rm origin
+```
 #### 推送到远程仓库
 * 第一次推送到GitHub  
 ```
@@ -353,7 +361,7 @@ $ git push origin <tag-name>
 ```
 #### 一次性推送全部尚未推送的标签到远程
 ```
-git push origin --tag
+git push origin --tags
 ```
 #### 删除一个本地标签
 ```
@@ -368,3 +376,72 @@ $ git tag -d <tag-name>
 ```
 $ git push origin :refs/tags/<tag-name>
 ```
+## 使用GitHub
+如何参与一个开源项目  
+
+`Fork`任意开源库 ——> 从自己的账户下`clone` ——> 修复bug或者新增一个功能 ——> 若希望官方库接受你的修改，可以在GitHub上发起一个`pull request`
+## 本地库既关联GitHub，又关联码云
+如原来已经关联了默认名`origin`的GitHub  
+1. 先删除已关联的名为`origin`的远程库：
+```
+$ git remote rm origin
+```
+2. 然后，先关联GitHub的远程库：
+```
+$ git remote add github git@github.com:username/repositoryname.git
+```
+注意，远程库的名称叫`github`，不叫`origin`了
+3. 接着，再关联码云的远程库：
+```
+$ git remote add gitee git@gitee.com:username/repositoryname.git
+```
+同样注意，远程库的名称叫`gitee`，不叫`origin`了  
+
+**注意**  多个关联后以上所以命令含的`origin`都换成相应的`github`或`gitee`  
+
+如果要推送到GitHub，使用命令：
+```
+$ git push github master
+```
+如果要推送到码云，使用命令：
+```
+$ git push gitee master
+```
+## 自定义Git
+#### 显示颜色
+让Git显示颜色，会让命令输出看起来更醒目：  
+```
+$ git config --global color.ui true
+```
+#### 忽略特殊文件
+[见廖老师教程](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/0013758404317281e54b6f5375640abbb11e67be4cd49e0000)
+#### 配置别名
+如
+* 用`git st`就表示`git status`
+```
+$ git config --global alias.st status
+```
+* 配置一个`git last`，让其显示最后一次提交信息：
+```
+$ git config --global alias.last 'log -1'
+```
+* 甚至还有人丧心病狂地把lg配置成了：
+```
+$ git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+```
+试试`git lg`的效果，很炫酷
+#### 配置文件
+* 配置Git的时候，加上`--global`是针对当前用户起作用的，如果不加，那只针对当前的仓库起作用  
+* 查看用户的配置信息：
+```
+git config --global --list
+```
+要查看当前仓库的，把`global`改成`local`就好
+* 配置文件放哪了？每个仓库的Git配置文件都放在`.git/config`文件中：`$ cat .gitconfig`
+* 别名就在`alias`后面，要删除别名，直接把对应的行删掉即可
+#### 搭建Git服务器
+GitHub就是一个免费托管开源代码的远程仓库  
+
+但是对于某些视源代码如生命的商业公司来说，既不想公开源代码，又舍不得给GitHub交保护费，那就只能自己搭建一台Git服务器作为私有仓库使用  
+
+[见廖老师教程](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/00137583770360579bc4b458f044ce7afed3df579123eca000)
