@@ -20,12 +20,14 @@ $ git config --global user.email "email@example.com"
 ```
 **注意**  `--global`参数表示你这台机器上所有的Git仓库都会使用这个配置。
 ## 创建版本库
-1. 选择一个合适目录，如`$ cd d:`
+#### 选择一个合适目录
+1. 如`$ cd d:`
 2. `$ mkdir <repository-name>`，创建库名
-3. `$ cd <repository-name>`，进入库内
-4. `$ git init`，初始化库
-   
+3. `$ cd <repository-name>`，进入库内  
+
 **补充**  `pwd`显示路径，`ls`显示当前目录，`ls -ah`显示隐藏目录
+#### 在当前目录初始化库
+`$ git init`  
 ## 使用vim编辑器
 1. `vi <file-name>`，新建或修改文件
 2. 按`i`进入编辑
