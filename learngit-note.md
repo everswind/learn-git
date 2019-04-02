@@ -434,7 +434,7 @@ $ git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Cre
 * 配置Git的时候，加上`--global`是针对当前用户起作用的，如果不加，那只针对当前的仓库起作用  
 * 查看用户的配置信息：
 ```
-git config --global --list
+$ git config --global --list
 ```
 要查看当前仓库的，把`global`改成`local`就好
 * 配置文件放哪了？每个仓库的Git配置文件都放在`.git/config`文件中：`$ cat .gitconfig`
@@ -444,4 +444,4 @@ GitHub就是一个免费托管开源代码的远程仓库
 
 但是对于某些视源代码如生命的商业公司来说，既不想公开源代码，又舍不得给GitHub交保护费，那就只能自己搭建一台Git服务器作为私有仓库使用  
 
-[见廖老师教程](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/00137583770360579bc4b458f044ce7afed3df579123eca000)
+[搭建见廖老师教程](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/00137583770360579bc4b458f044ce7afed3df579123eca000)
