@@ -27,7 +27,9 @@ $ git config --global user.email "email@example.com"
 
 **补充**  `pwd`显示路径，`ls`显示当前目录，`ls -ah`显示隐藏目录
 #### 在当前目录初始化库
-`$ git init`  
+```
+$ git init
+```
 ## 使用vim编辑器
 1. `$ vi <file-name>`，新建或修改文件
 2. 按`i`进入编辑
@@ -50,9 +52,13 @@ $ git commit -m "description"
 ```
 **注意**  可以多次`git add `，最后一次`git commit`
 ## 查看工作区当前状态
-`$ git status`
+```
+$ git status
+```
 ## 时光穿梭
-`$ git reset --hard commit-id` 
+```
+$ git reset --hard commit-id
+``` 
 
 **确定版本回退commit-id**  
 
@@ -99,61 +105,83 @@ $ git commit -m "description"
 `$ git checkout -- <file name>`，其实就是用版本库里的版本替换工作区的版本
 ## 远程仓库
 #### 创建SSH Key
-`$ ssh-keygen -t rsa -C "youremail@example.com"`  
+```
+$ ssh-keygen -t rsa -C "youremail@example.com"
+```  
 
-**补充**  
-
-在用户主目录下(`cd`)  
+**补充**  在用户主目录下(`cd`)  
 
 `$ ls -ah`可见`.ssh`目录  
 
 `$ cd .ssh`可见`id_rsa`(私钥不能泄露)和`id_rsa.pub`(公钥可公开)
 #### 关联远程仓库
-`$ git remote add origin git@github.com:username/repositoryname.git`
-
-或  
-
-`$ git remote add origin https://github.com/username/repositoryname.git`  
-
+```
+$ git remote add origin git@github.com:username/repositoryname.git
+```
+或
+```
+$ git remote add origin https://github.com/username/repositoryname.git
+```  
 远程库默认名字为`origin` 
 #### 推送到远程仓库
 * 第一次推送到GitHub  
-
-  `$ git push -u origin master`，推送master分支
-* 后续推送  
-
-  `$ git push origin master	`，不再使用参数`-u`
+```
+$ git push -u origin master
+```
+推送master分支
+* 后续推送
+```
+$ git push origin master
+```
+不再使用参数`-u`
 #### 从远程库克隆
-`$ git clone git@github.com:username/repositoryname.git`  
-
+```
+$ git clone git@github.com:username/repositoryname.git
+```  
 或  
-
-`$ git clone https://github.com/username/repositoryname.git`
-
+```
+$ git clone https://github.com/username/repositoryname.git
+```
 ## 分支管理
 #### 查看分支
-`$ git branch`
+```
+$ git branch
+```
 #### 创建分支
-`$ git branch <branch-name>`
+```
+$ git branch <branch-name>
+```
 #### 切换分支
-`$ git checkout <branch-name>`
+```
+$ git checkout <branch-name>
+```
 #### 创建+切换分支
-`$ git checkout -b <branch-name>`
+```
+$ git checkout -b <branch-name>
+```
 #### 合并某分支到当前分支
-`$ git merge <branch-name>`
+```
+$ git merge <branch-name>
+```
 #### 普通模式合并分支
-`$ git merge --no-ff -m "description" <branch-name>`  
-
+```
+$ git merge --no-ff -m "description" <branch-name>
+```  
 通常进行分支合并时，如果可以，Git会使用`Fast forward`模式，删除分支后，分支历史信息会丢失  
 
 `--no-ff`表示禁用`Fast forward`模式，能看出曾做过合并
 #### 删除分支
-`$ git branch -d <branch-name>`
+```
+$ git branch -d <branch-name>
+```
 #### 强行删除分支
-`$ git branch -D <branch-name>`
+```
+$ git branch -D <branch-name>
+```
 #### 查看分支合并图
-`$ git log --graph`  
-
+```
+$ git log --graph
+```  
 `$ git log --graph --pretty=oneline --abbrev-commit`，简洁查看
 ### Bug分支
 假设场景——设A为游戏软件  
@@ -168,32 +196,52 @@ $ git commit -m "description"
 8. 修复后，在master上合并并删除issue101
 9. 切回dev，恢复原本工作，继续工作
 #### 保存工作现场
-`$ git stash`
+```
+$ git stash
+```
 #### 查看保存的工作现场
-`$ git stash list`
+```
+$ git stash list
+```
 #### 恢复工作现场
-`$ git stash apply`
+```
+$ git stash apply
+```
 #### 删除工作现场
-`$ git stash drop`
+```
+$ git stash drop
+```
 #### 恢复并删除工作现场
-`git stash pop`
+```
+git stash pop
+```
 ### Feature分支
 每添加一个新功能，最好新建一个feature分支，在上面开发完成后，合并，最后，删除该feature分支
 ## 多人协作
 #### 查看远程库信息
-`$ git remote`或`git remote -v`
+```
+$ git remote`或`git remote -v
+```
 #### 本地推送分支
-`$ git push origin <branch-name>`
+```
+$ git push origin <branch-name>
+```
 #### 在本地创建和远程分支对应的分支
-`$ git checkout -b <branch-name> origin/<branch-name>`
+```
+$ git checkout -b <branch-name> origin/<branch-name>
+```
 #### 建立本地分支和远程分支的关联
-`$ git branch --set-upstream <branch-name> origin/<branch-name>`  
-
+```
+$ git branch --set-upstream <branch-name> origin/<branch-name>
+```  
 或  
-
-`$ git branch --set-upstream-to=origin/<branch-name> <branch-name>`
+```
+$ git branch --set-upstream-to=origin/<branch-name> <branch-name>
+```
 #### 从远程抓取分支
-`$ git pull`
+```
+$ git pull
+```
 #### 多人协作通常的工作模式
 1. 先试图推送自己的修改`git push`
 2. 若推送失败，则远程分支比本地分支更新，`git pull`拉取远程分支试图合并
@@ -201,40 +249,59 @@ $ git commit -m "description"
 4. 若没有冲突或解决了冲突，再次推送`git push`
 ## Rebase
 “变基”  
-
-`$ git rebase`  
-
-只对尚未推送或尚未分享给别人的本地修改执行变基操作清理历史  
-
-从不对已推送至别处的提交执行变基操作
+```
+$ git rebase
+```  
+只对尚未推送或尚未分享给别人的本地修改执行变基操作清理历史，从不对已推送至别处的提交执行变基操作
 ## 标签管理
 发布一个版本时，我们通常先在版本库中打一个标签（`tag`），这样，就唯一确定了打标签时刻的版本  
 
 将来无论什么时候，取某个标签的版本，就是把那个打标签的时刻的历史版本取出来。所以，标签也是版本库的一个快照
 #### 创建标签
-`$ git tag <tag-name>`，在最新commit上打一个标签  
-
-`$ git tag <tag-name> commit-id`，在对应的commit_id上打一个新标签
+```
+$ git tag <tag-name>
+```
+在最新commit上打一个标签  
+```
+$ git tag <tag-name> commit-id
+```
+在对应的commit_id上打一个新标签
 #### 创建带有说明的标签
-`$ git tag -a <tag-name> -m "description" commit-id`，`-a`指定标签名，`-m`指定说明文字  
+```
+$ git tag -a <tag-name> -m "description" commit-id
+```
+`-a`指定标签名，`-m`指定说明文字  
 #### 查看所有标签
-`$ git tag`  
+```
+$ git tag
+```  
 #### 查看对应标签的信息
-`$ git show <tag-name>`
-**注意**标签总是和某个commit挂钩。  
-
-如果这个commit既出现在master分支，又出现在dev分支，那么在这两个分支上都可以看到这个标签。
+```
+$ git show <tag-name>
+```
+**注意**标签总是和某个commit挂钩。如果这个commit既出现在master分支，又出现在dev分支，那么在这两个分支上都可以看到这个标签。
 ### 操作标签
 #### 推送某个标签到远程
-`$ git push origin <tag-name>`
+```
+$ git push origin <tag-name>
+```
 #### 一次性推送全部尚未推送的标签到远程
-`git push origin --tag`
+```
+git push origin --tag
+```
 #### 删除一个本地标签
-`$ git tag -d <tag-name>`
+```
+$ git tag -d <tag-name>
+```
 #### 删除一个远程标签
-`$ git tag -d <tag-name>`，先从本地删除  
-
-`$ git push origin :refs/tags/<tag-name>`，在从远程删除
+```
+$ git tag -d <tag-name>
+```
+先从本地删除  
+```
+$ git push origin :refs/tags/<tag-name>
+```
+再从远程删除
 
 
 
